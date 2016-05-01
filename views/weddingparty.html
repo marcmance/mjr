@@ -1,0 +1,27 @@
+<section id="weddingparty">
+  <div class="header">Wedding Party</div>
+  <div ng-repeat="p in vars.party" class="party">
+    <div class="bridesmaids">
+      <div class="small-header name">
+        {{p.b}}
+      </div>
+      <div class="img">
+        <img ng-src="{{p.bimg}}" alt="Description" />
+      </div>
+      <div class="desc">
+        {{p.bdesc}}
+      </div>
+    </div>
+    <div class="groomsmen">
+      <div class="small-header name">
+        {{p.g}}
+      </div>
+      <div class="img">
+        <img ng-src="{{p.gimg}}" alt="Description" />
+      </div>
+      <div class="desc">
+        {{p.gdesc}}
+      </div>
+    </div>
+  </div>
+</section>

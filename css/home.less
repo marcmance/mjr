@@ -1,0 +1,39 @@
+#home {
+  margin-top: 20px;
+  .comingsoon {
+    background-image:url('../MJ_91016.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    text-align:center;
+    width:100%;
+    max-height: 1060px;
+    max-width: 1060px;
+    height: 80%;
+    border-radius: 30px;
+    font-family: @header-font;
+  }
+
+  .text {
+    font-size: 65px;
+    padding-top: 30px;
+    width: 50%;
+    padding: 0;
+    border-radius: 10px;
+    margin: 0 auto;
+    padding-top: 20px;
+  }
+
+  @media (max-height: 600px) {
+    .text {
+      background-color: rgba(213, 229, 235,0.5);
+    }
+  }
+
+  @media (min-width: 1150px) {
+    .comingsoon {
+      margin: 0 auto;
+    }
+  }
+}
+

@@ -1,0 +1,29 @@
+#weddingparty {
+  margin: 20px 0;
+  padding: 30px;
+
+  .party {
+    margin: 20px 0;
+    .bridesmaids {
+      float: left;
+      width: 50%;
+    }
+    .groomsmen {
+      float: right;
+      width: 50%;
+    }
+
+    .img {
+      margin: 10px 0;
+      img{
+         width: 300px;
+      }
+    }
+
+    &:after {
+      clear: both;
+      display: block;
+      content: "";
+    }
+  }
+}
