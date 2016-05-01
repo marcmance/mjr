@@ -2,5 +2,5 @@ mjr.controller('homeController', ['$scope', '$route', '$rootScope', function ($s
   $rootScope.nonHome = false;
   $scope.test = "?";
 
-  $scope.testFunction();
+  //$scope.testFunction();
 }]);
