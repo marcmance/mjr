@@ -10,7 +10,8 @@
         Maid of Honor
       </div>
       <div class="img">
-        <img ng-src="images/{{p.bimg}}" alt="Description" />
+        <img ng-src="images/{{p.bimg}}" alt="Description"/>
+        <img ng-src="images/{{p.bimg2}}" alt="Description" ng-if="p.bimg2" />
       </div>
       <div class="desc">
         {{p.bdesc}}
@@ -24,8 +25,8 @@
         Best Man
       </div>
       <div class="img">
-        <img ng-src="images/{{p.gimg}}" alt="Description" ng-if="p.bimg"/>
-        <img ng-src="doge.jpg" ng-if="!p.gimg" alt="Description" />
+        <img ng-src="images/{{p.gimg}}" alt="Description" ng-if="p.gimg"/>
+        <img ng-src="images/{{p.gimg2}}" alt="Description" ng-if="p.gimg2" />
       </div>
       <div class="desc" ng-bind-html="p.gdesc">
       </div>

@@ -41,6 +41,11 @@ mjr.config(['$routeProvider',
       templateUrl: 'views/registry.html',
       controller: 'registryController'
     })
+    .when('/feed',
+    {
+      templateUrl: 'views/feed.html',
+      controller: 'feedController'
+    })
     .when('/edit/wedding-party',
     {
       templateUrl: 'views/weddingpartyedit.html',
