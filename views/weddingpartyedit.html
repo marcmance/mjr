@@ -1,5 +1,5 @@
 <section id="weddingpartyedit">
-  <div class="party" ng-repeat="wp in weddingparty">
+  <div class="party" ng-repeat="wp in weddingparty | orderBy:['order']">
     <div class="bridesmaids">
       <b>{{wp.b}}</b><br/>
       <textarea type="text" ng-model="wp.bdesc"> </textarea>
@@ -9,5 +9,5 @@
       <textarea type="text" ng-model="wp.gdesc"/></textarea>
     </div>
   </div>
-  <button ng-click="save()">Add Name</button>
+  <button ng-click="save()">Save</button>
 </section>

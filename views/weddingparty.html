@@ -1,7 +1,7 @@
 <section id="weddingparty">
   <div class="header">Wedding Party</div>
   <div class="fineprint">(according to the bride and groom)</div>
-  <div ng-repeat="p in vars.party" class="party">
+  <div ng-repeat="p in vars.party | orderBy:['order']" class="party" >
     <div class="bridesmaids">
       <div class="small-header name">
         {{p.b}}
@@ -24,10 +24,10 @@
         Best Man
       </div>
       <div class="img">
-        <img ng-src="doge.jpg" alt="Description" />
+        <img ng-src="images/{{p.gimg}}" alt="Description" ng-if="p.bimg"/>
+        <img ng-src="doge.jpg" ng-if="!p.gimg" alt="Description" />
       </div>
-      <div class="desc">
-        {{p.gdesc}}
+      <div class="desc" ng-bind-html="p.gdesc">
       </div>
     </div>
   </div>
