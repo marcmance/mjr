@@ -5,15 +5,23 @@ mjr.controller('rsvpController', ['$scope', '$route', '$rootScope', '$firebaseOb
     clear: true,
     nextSection: false,
     showError: false,
+    showSubmitError: false,
     showThanks: false,
     showRegrets: false,
     showThanksOnce: false,
+    submitCheck: false,
+    submitted: false,
+    guestCount: 0,
+    responseCount: 0,
     guests: {},
-    invitations: inviteInfo.invites
+    invitations: inviteInfo.invites,
+    currentInvitation: {}
   }
 
-  console.log($scope.vars.invitations.length);
-
+  $scope.test = function() {
+    $scope.vars.submitted = true;
+    console.log("?");
+  }
 
   $scope.submit = function() {
     if($scope.vars.password != '') {
@@ -22,13 +30,17 @@ mjr.controller('rsvpController', ['$scope', '$route', '$rootScope', '$firebaseOb
       $scope.vars.invitations.$ref().orderByChild("invitationID").equalTo(num).once("value", function(dataSnapshot){
           if(dataSnapshot.exists()){
             dataSnapshot.forEach(function(childSnapshot) {
-              var childData = childSnapshot.val();
-              console.log("we're good");
-              for(var x = 0; x < childData.guests.length; x++) {
-                var id = childData.guests[x];
+              $scope.currentInvitation = childSnapshot;
+              console.log("here", $scope.currentInvitation.val());
+              if($scope.currentInvitation.val().response) {
+                $scope.test();
+              }
+              for(var x = 0; x < $scope.currentInvitation.val().guests.length; x++) {
+                var id = $scope.currentInvitation.val().guests[x];
                 var personref = new Firebase("https://marcandjennyromance.firebaseio.com/person/"+id);
                 $scope.vars.guests[id] = $firebaseObject(personref);
                 $scope.vars.nextSection = true;
+                $scope.vars.guestCount++;
               }
             });
           } else {
@@ -72,33 +84,64 @@ mjr.controller('rsvpController', ['$scope', '$route', '$rootScope', '$firebaseOb
   };
 
   $scope.yes = function(id) {
-    var guest = $scope.vars.guests[id];
-    guest.status = 1;
-    if(guest.rsvpTime == undefined || guest.rsvpTime == '') {
-      guest.rsvpTime = $scope.getCurrentDate();
+    if(!$scope.vars.submitted) {
+      var guest = $scope.vars.guests[id];
+      if(guest.status == 2) {
+        $scope.vars.responseCount++;
+        if($scope.vars.responseCount == $scope.vars.guestCount) {
+          $scope.vars.submitCheck = true;
+        }
+      }
+      guest.status = 1;
+      if(guest.rsvpTime == undefined || guest.rsvpTime == '') {
+        guest.rsvpTime = $scope.getCurrentDate();
+      }
+      else {
+        guest.rsvpEdit = guest.rsvpEdit || [];
+        guest.rsvpEdit.push($scope.getCurrentDate());
+      }
     }
-    else {
-      guest.rsvpEdit = guest.rsvpEdit || [];
-      guest.rsvpEdit.push($scope.getCurrentDate());
-    }
-
-    guest.$save();
-    $scope.vars.showThanks = true;
-    $scope.vars.showRegrets = false;
   }
   $scope.no = function(id) {
-    var guest = $scope.vars.guests[id];
-    guest.status = 0;
-    if(guest.rsvpTime == undefined || guest.rsvpTime == '') {
-      guest.rsvpTime = $scope.getCurrentDate();
+    if(!$scope.vars.submitted) {
+      var guest = $scope.vars.guests[id];
+      if(guest.status == 2) {
+        $scope.vars.responseCount++;
+        if($scope.vars.responseCount == $scope.vars.guestCount) {
+          $scope.vars.submitCheck = true;
+        }
+      }
+      guest.status = 0;
+      if(guest.rsvpTime == undefined || guest.rsvpTime == '') {
+        guest.rsvpTime = $scope.getCurrentDate();
+      }
+      else {
+        guest.rsvpEdit = guest.rsvpEdit || [];
+        guest.rsvpEdit.push($scope.getCurrentDate());
+      }
+    }
+  }
+
+  console.log($scope.currentInvitation);
+
+  $scope.submitInvitation = function() {
+    if($scope.vars.submitCheck) {
+      for(g in $scope.vars.guests) {
+        var guest = $scope.vars.guests[g];
+        guest.$save();
+        $scope.vars.showThanks = true;
+        $scope.vars.showSubmitError = false;
+        $scope.vars.submitted = true;
+        console.log($scope.currentInvitation);
+        var invite = $scope.vars.invitations.$getRecord($scope.currentInvitation.key());
+        invite.response = true;
+
+        $scope.vars.invitations.$save(invite);
+      }
     }
     else {
-      guest.rsvpEdit = guest.rsvpEdit || [];
-      guest.rsvpEdit.push($scope.getCurrentDate());
+      $scope.vars.showSubmitError = true;
     }
-    guest.$save();
-    $scope.vars.showRegrets = true;
-    $scope.vars.showThanks = false;
   }
 
 }]);

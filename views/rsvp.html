@@ -11,7 +11,7 @@
     <div class="error" ng-show="vars.showError"/>Invalid invitation password</div>
   </div>
   <div ng-show="vars.nextSection">
-    <div class="honor"><b>We request your honor.</b></div>
+    <div class="honor"><b>We request your honor. Please select your response(s) and hit the submit button.</b></div>
     <div ng-repeat="g in vars.guests" class="guest">
       <div class="guest-name">
         {{g.first_name}} {{g.last_name}}
@@ -20,8 +20,17 @@
         <div ng-click="yes(g.$id)" class="yes" ng-class="{selected: g.status == 1}"/> Yes</div> <div ng-click="no(g.$id)" class="no" ng-class="{selected: g.status == 0}"> No </div>
       </div>
     </div>
+    <div class="submit-container">
+      <div ng-click="submitInvitation()" class="submit" ng-show="!vars.submitted"/> Submit </div>
+    </div>
+    <div class="submitError" ng-show="vars.showSubmitError">
+      Please select a reponse for each person!
+    </div>
     <div class="thanks" ng-show="vars.showThanks">
-      Thanks for your response! We can't wait to celebrate with you!
+      Thanks for your response! Please email us with any changes need to be made.
+    </div>
+    <div class="thanks" ng-show="!vars.showThanks && vars.submitted">
+      You have submitted your response already. If any changes need to be made please email us at marcandjennyromance@gmail.com.
     </div>
     <div class="thanks" ng-show="vars.showRegrets">
       We're sorry to hear you can't make it but thank you for the response.
