@@ -1,0 +1,131 @@
+#rsvp {
+
+  .info {
+    text-align: center;
+    margin-bottom: 80px;
+    font-size: 18px;
+  }
+  .form {
+    text-align: center;
+    form {
+      margin: 0 auto;
+    }
+    .password {
+      width: 400px;
+      border-bottom: 1px solid @off;
+      border-top: 1px solid @off;
+      border-right: none;
+      border-left: none;
+      margin: 0 auto 20px;
+      text-align: center;
+      height: 50px;
+      font-size: 32px;
+      font-family: @header-font;
+      letter-spacing: .5px;
+      color: @off;
+    }
+    .submit {
+      border: 1px solid @off;
+      width: 70px;
+      height: 50px;
+      background: none;
+      margin-left: 20px;
+      font-family: @header-font;
+      font-size: 20px;
+      color: @off;
+    }
+    @media (max-width: 600px) {
+      .password {
+        width: 100%;
+      }
+    }
+  }
+
+  .honor {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+
+  .guest {
+    border-bottom: 1px solid @off;
+    margin-bottom: 20px;
+    height: 60px;
+    vertical-align: middle;
+    line-height: 60px;
+    padding-bottom: 20px;
+    font-family: @header-font;
+    &:after {
+      clear: both;
+      content: "";
+      display: block;
+    }
+    &:last-child {
+      border-bottom: none;
+    }
+    .guest-name {
+      float: left;
+      width: 50%;
+      height: 100%;
+      font-size: 40px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 600px) {
+      height: auto;
+      .guest-name {
+        float: none;
+        width: 100%;
+        height: 60px;
+      }
+      .response {
+        float: none;
+        width: 100%;
+        height: 60px;
+      }
+      .yes, .no {
+        height: 60px;
+      }
+
+      &:after {
+        clear: none;
+      }
+    }
+  }
+  .error {
+    margin-top: 20px;
+    color: red;
+    text-align: center;
+  }
+  .response {
+    float: left;
+    width: 50%;
+    height: 100%;
+
+    &:after {
+      clear: both;
+      content: "";
+      display: block;
+    }
+  }
+
+  .yes, .no {
+    width: 60px;
+    height: 100%;
+    border-radius: 50%;
+    margin: 0 20px 0 0;
+    border: 1px solid black;
+    float: left;
+    text-align: center;
+    font-size: 30px;
+  }
+
+  .selected {
+    background-color: @off;
+    border: 1px solid @off;
+  }
+
+  .thanks {
+    font-size: 20px;
+  }
+}

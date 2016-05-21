@@ -46,6 +46,34 @@ mjr.config(['$routeProvider',
       templateUrl: 'views/feed.html',
       controller: 'feedController'
     })
+    .when('/rsvp/',
+    {
+      templateUrl: 'views/rsvp.html',
+      controller: 'rsvpController',
+      resolve: {
+      inviteInfo: function($firebaseArray){
+        var ref = new Firebase("https://marcandjennyromance.firebaseio.com/invitation");
+        var invites = $firebaseArray(ref);
+        return {
+            invites: invites
+          };
+        }
+      }
+    })
+    .when('/rsvp/:id',
+    {
+      templateUrl: 'views/rsvp.html',
+      controller: 'rsvpController',
+      resolve: {
+      inviteInfo: function($firebaseArray){
+        var ref = new Firebase("https://marcandjennyromance.firebaseio.com/invitation");
+        var invites = $firebaseArray(ref);
+        return {
+            invites: invites
+          };
+        }
+      }
+    })
     .when('/edit/wedding-party',
     {
       templateUrl: 'views/weddingpartyedit.html',

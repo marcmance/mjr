@@ -1,0 +1,30 @@
+<section id="rsvp">
+  <div class="header">RSVP</div>
+  <div class="info">
+    To RSVP please enter the password on your invitation card. Alternatively please email us at marcandjennyromance@gmail.com. <b>Please RSVP by July 20th, 2016.</b>
+  </div>
+  <div ng-show="!vars.nextSection" class="form">
+    <form>
+      <input ng-model="vars.password" ng-click="clearPassword()" class="password"/>
+      <input ng-click="submit()" value="Submit" type="submit" class="submit"></input>
+    </form>
+    <div class="error" ng-show="vars.showError"/>Invalid invitation password</div>
+  </div>
+  <div ng-show="vars.nextSection">
+    <div class="honor"><b>We request your honor.</b></div>
+    <div ng-repeat="g in vars.guests" class="guest">
+      <div class="guest-name">
+        {{g.first_name}} {{g.last_name}}
+      </div>
+      <div class="response">
+        <div ng-click="yes(g.$id)" class="yes" ng-class="{selected: g.status == 1}"/> Yes</div> <div ng-click="no(g.$id)" class="no" ng-class="{selected: g.status == 0}"> No </div>
+      </div>
+    </div>
+    <div class="thanks" ng-show="vars.showThanks">
+      Thanks for your response! We can't wait to celebrate with you!
+    </div>
+    <div class="thanks" ng-show="vars.showRegrets">
+      We're sorry to hear you can't make it but thank you for the response.
+    </div>
+  </div>
+</section>

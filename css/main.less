@@ -13,6 +13,7 @@ body {
   padding: 0;
   background-color: @bgcolor;
   font-family: @body-font;
+  width: 100%;
 }
 
 a {
@@ -55,6 +56,8 @@ section {
     background-position: top;
     margin-top: 40px;
     background-size: 100% auto;
+    margin-top:0;
+    height: 100%;
     @media (min-width: 500px) {
       margin-top:0;
     }
@@ -89,6 +92,10 @@ section {
     border:none;
     padding: 0;
     margin-top: 0;
+
+    ul {
+      margin: 0;
+    }
   }
 }
 
@@ -123,9 +130,7 @@ section {
 
   &.non-home {
     max-width: 980px;
-    //background-color: @bgcolor;
     min-height: 600px;
-    height: auto;
     background-color: white;
     background-color: @bodybg;
     font-size: 14px;
