@@ -93,13 +93,8 @@ mjr.controller('rsvpController', ['$scope', '$route', '$rootScope', '$firebaseOb
         }
       }
       guest.status = 1;
-      if(guest.rsvpTime == undefined || guest.rsvpTime == '') {
-        guest.rsvpTime = $scope.getCurrentDate();
-      }
-      else {
-        guest.rsvpEdit = guest.rsvpEdit || [];
-        guest.rsvpEdit.push($scope.getCurrentDate());
-      }
+      guest.rsvpTime = $scope.getCurrentDate();
+      guest.rsvpTimestamp = Date.now();
     }
   }
   $scope.no = function(id) {
@@ -112,13 +107,8 @@ mjr.controller('rsvpController', ['$scope', '$route', '$rootScope', '$firebaseOb
         }
       }
       guest.status = 0;
-      if(guest.rsvpTime == undefined || guest.rsvpTime == '') {
-        guest.rsvpTime = $scope.getCurrentDate();
-      }
-      else {
-        guest.rsvpEdit = guest.rsvpEdit || [];
-        guest.rsvpEdit.push($scope.getCurrentDate());
-      }
+      guest.rsvpTime = $scope.getCurrentDate();
+      guest.rsvpTimestamp = Date.now();
     }
   }
 
@@ -135,7 +125,8 @@ mjr.controller('rsvpController', ['$scope', '$route', '$rootScope', '$firebaseOb
         console.log($scope.currentInvitation);
         var invite = $scope.vars.invitations.$getRecord($scope.currentInvitation.key());
         invite.response = true;
-
+        invite.rsvpTime = $scope.getCurrentDate();
+        invite.rsvpTimestamp = Date.now();
         $scope.vars.invitations.$save(invite);
       }
     }
