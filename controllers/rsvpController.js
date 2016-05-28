@@ -116,19 +116,23 @@ mjr.controller('rsvpController', ['$scope', '$route', '$rootScope', '$firebaseOb
 
   $scope.submitInvitation = function() {
     if($scope.vars.submitCheck) {
+      var confirmed = 0;
       for(g in $scope.vars.guests) {
         var guest = $scope.vars.guests[g];
         guest.$save();
-        $scope.vars.showThanks = true;
-        $scope.vars.showSubmitError = false;
-        $scope.vars.submitted = true;
-        console.log($scope.currentInvitation);
-        var invite = $scope.vars.invitations.$getRecord($scope.currentInvitation.key());
-        invite.response = true;
-        invite.rsvpTime = $scope.getCurrentDate();
-        invite.rsvpTimestamp = Date.now();
-        $scope.vars.invitations.$save(invite);
+        if(guest.status == 1) {
+          confirmed++;
+        }
       }
+      $scope.vars.showThanks = true;
+      $scope.vars.showSubmitError = false;
+      $scope.vars.submitted = true;
+      var invite = $scope.vars.invitations.$getRecord($scope.currentInvitation.key());
+      invite.response = true;
+      invite.rsvpTime = $scope.getCurrentDate();
+      invite.rsvpTimestamp = Date.now();
+      invite.confirmedCount = confirmed;
+      $scope.vars.invitations.$save(invite);
     }
     else {
       $scope.vars.showSubmitError = true;
