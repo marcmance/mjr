@@ -20,7 +20,6 @@ mjr.controller('rsvpController', ['$scope', '$route', '$rootScope', '$firebaseOb
 
   $scope.test = function() {
     $scope.vars.submitted = true;
-    console.log("?");
   }
 
   $scope.submit = function() {
@@ -31,7 +30,6 @@ mjr.controller('rsvpController', ['$scope', '$route', '$rootScope', '$firebaseOb
           if(dataSnapshot.exists()){
             dataSnapshot.forEach(function(childSnapshot) {
               $scope.currentInvitation = childSnapshot;
-              console.log("here", $scope.currentInvitation.val());
               if($scope.currentInvitation.val().response) {
                 $scope.test();
               }
@@ -55,7 +53,6 @@ mjr.controller('rsvpController', ['$scope', '$route', '$rootScope', '$firebaseOb
   };
 
   if($route.current.params.id != undefined) {
-    console.log($scope.vars.invitations);
     $scope.vars.password = $route.current.params.id;
     $scope.submit();
   }
@@ -111,8 +108,6 @@ mjr.controller('rsvpController', ['$scope', '$route', '$rootScope', '$firebaseOb
       guest.rsvpTimestamp = Date.now();
     }
   }
-
-  console.log($scope.currentInvitation);
 
   $scope.submitInvitation = function() {
     if($scope.vars.submitCheck) {
