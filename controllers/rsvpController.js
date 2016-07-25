@@ -1,4 +1,4 @@
-mjr.controller('rsvpController', ['$scope', '$route', '$rootScope', '$firebaseObject', '$firebaseArray', 'inviteInfo', function ($scope, $route, $rootScope, $firebaseObject, $firebaseArray, inviteInfo) {
+mjr.controller('rsvpController', ['$scope', '$route', '$http', '$rootScope', '$firebaseObject', '$firebaseArray', 'inviteInfo', function ($scope, $route, $http, $rootScope, $firebaseObject, $firebaseArray, inviteInfo) {
   $rootScope.nonHome = true;
   $scope.vars = {
     password: "Please enter your password here",
@@ -128,6 +128,7 @@ mjr.controller('rsvpController', ['$scope', '$route', '$rootScope', '$firebaseOb
       invite.rsvpTimestamp = Date.now();
       invite.confirmedCount = confirmed;
       $scope.vars.invitations.$save(invite);
+      //$http.post('http://localhost/~mmance15/twitter/test.php', invite).then(function(data) {console.log(data)}, function(){console.log("fial")});
     }
     else {
       $scope.vars.showSubmitError = true;
